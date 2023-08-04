@@ -34,7 +34,7 @@ Data must be in any one of the following formats:
 
    a. CSV file:
    ```
-   treatment_plan_name,content
+   content_name,content
    a,"Hi,my name is Siddhartha and I am from Nepal"
    b,I am interested in Natural Language Processing
    ```
@@ -42,24 +42,24 @@ Data must be in any one of the following formats:
    b. Dictionary Format:
    ```
    {
-     "treatment_plan_name":"a",
+     "content_name":"a",
      "content":"Hi my name is Siddhartha and I am from Nepal"
    }
    ```
 
 ### Deletion:
-For deletion, you must provide the `treatment_plan_name` for which you want to delete the record.
+For deletion, you must provide the `content_name` for which you want to delete the record.
 
 ### Update:
 For Updating, data must be in Dictionary Format:
 ```
 {
-  "treatment_plan_name":"a",
+  "content_name":"a",
   "content":"Hi my name is Siddhartha and I am from Nepal"
 }
 ```
 
-Then, it will update if the treatment plan name already exists on the database. Else it will simply insert new data.
+Then, it will update if the content name already exists on the database. Else it will simply insert new data.
 
 ### Similarity Search:
-For similarity search, we will simply need to provide a query from a user, the threshold score and finally treatment_plan_name if we want to filter data based on treatment_plan and then do similarity search.
+For similarity search, we will simply need to provide a query from a user, the threshold score and finally content_name if we want to filter data based on content_name and then do similarity search.

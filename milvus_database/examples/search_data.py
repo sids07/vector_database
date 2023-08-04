@@ -15,12 +15,12 @@ if __name__ == "__main__":
         embedding_service= embedding_processor
     )
 
-    # If you want to first filter data based on some treatment_plan then uncomment below res:
+    # If you want to first filter data based on some content_name then uncomment below res:
 
     # res = service.sentence_similarity_search(
     #     query= "what is type 2 diabetes?",
     #     thresh= 0.001,
-    #     treatment_plan_name= "type_2_diabetes"
+    #     content_name= "type_2_diabetes"
     # )
 
     res = service.sentence_similarity_search(

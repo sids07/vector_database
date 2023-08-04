@@ -33,8 +33,8 @@ class DummyCollection(MilvusCollectionBase):
                 auto_id = True
             )
 
-            treatment_plan_name = FieldSchema(
-                name="treatment_plan_name",
+            content_name = FieldSchema(
+                name="content_name",
                 dtype = DataType.VARCHAR,
                 max_length = 100
             )
@@ -46,7 +46,7 @@ class DummyCollection(MilvusCollectionBase):
             )
 
             schema = CollectionSchema(
-                fields= [id, treatment_plan_name, content_embeddings],
+                fields= [id, content_name, content_embeddings],
                 description="Dummy Collection For Testing."
             )
 
@@ -84,7 +84,7 @@ class DummyCollection(MilvusCollectionBase):
         return True
     
     
-    def hybrid_search(self, embeddings, anns_field:str, treatment_name:str=None, top_k: int = 5):
+    def hybrid_search(self, embeddings, anns_field:str, content_name:str=None, top_k: int = 5):
         search_params = {
             "metric_type":"IP",
             "params":{
@@ -92,29 +92,29 @@ class DummyCollection(MilvusCollectionBase):
             }
         }
 
-        if treatment_name:
-            print("treatment plan name found")
+        if content_name:
+            print("content_name found")
             search_result = self.collection.search(
                 data = embeddings,
                 anns_field=anns_field,
                 param = search_params,
                 limit = top_k,
-                expr = f'treatment_plan_name == \"{treatment_name}\"',
-                output_fields = ["id","treatment_plan_name"]
+                expr = f'content_name == \"{content_name}\"',
+                output_fields = ["id","content_name"]
             )
         else:
-            print("treatment plan name not found")
+            print("content_name not found")
             search_result = self.collection.search(
                 data = embeddings,
                 anns_field=anns_field,
                 param = search_params,
                 limit = top_k,
-                output_fields = ["id","treatment_plan_name"]
+                output_fields = ["id","content_name"]
             )    
         return search_result
 
-    def get_primary_keys_associated(self, treatment_plan_name):
-        exp = f'treatment_plan_name == \"{treatment_plan_name}\"'
+    def get_primary_keys_associated(self, content_name):
+        exp = f'content_name == \"{content_name}\"'
         results = self.collection.query(
             expr=exp
         )
@@ -123,8 +123,8 @@ class DummyCollection(MilvusCollectionBase):
             primary_key_list.append(result['id'])
         return primary_key_list
     
-    def is_treatment_plan_exist(self, treatment_plan_name):
-        exp = f'treatment_plan_name == \"{treatment_plan_name}\"'
+    def is_content_exist(self, content_name):
+        exp = f'content_name == \"{content_name}\"'
         res = self.collection.query(
             expr=exp
         )

@@ -7,7 +7,7 @@ if __name__ == "__main__":
     connection = MilvusDBConnection()
     connection.start()
 
-    treatment_plan_name = "hepatitis_c"
+    content_name = "hepatitis_b"
 
     embedding_processor = TransformerEmbeddingProcessor(
         model_name="sentence-transformers/multi-qa-mpnet-base-dot-v1"
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     )
 
     response = service.delete_data(
-        treatment_plan_name= treatment_plan_name
+        content_name= content_name
     )
 
     connection.stop()
